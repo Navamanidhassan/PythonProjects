@@ -1,22 +1,32 @@
 {
     "Navu": {
-        "balance": 630,
+        "balance": 660,
         "stats": {
-            "total_spins": 7,
-            "total_won": 22,
-            "total_bet": 492,
-            "biggest_win": 22,
-            "rounds_won": 1
+            "total_spins": 8,
+            "total_won": 82,
+            "total_bet": 522,
+            "biggest_win": 60,
+            "rounds_won": 2
         }
     },
     "TestUser": {
-        "balance": 500100,
+        "balance": 497120,
         "stats": {
-            "total_spins": 0,
-            "total_won": 0,
-            "total_bet": 0,
-            "biggest_win": 0,
-            "rounds_won": 0
+            "total_spins": 19,
+            "total_won": 1300,
+            "total_bet": 4780,
+            "biggest_win": 500,
+            "rounds_won": 4
+        }
+    },
+    "das": {
+        "balance": 0,
+        "stats": {
+            "total_spins": 12,
+            "total_won": 700,
+            "total_bet": 1200,
+            "biggest_win": 200,
+            "rounds_won": 5
         }
     }
 }
