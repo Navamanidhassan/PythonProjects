@@ -1,10 +1,20 @@
 {
     "Navu": {
-        "balance": 641,
+        "balance": 630,
         "stats": {
-            "total_spins": 6,
+            "total_spins": 7,
+            "total_won": 22,
+            "total_bet": 492,
+            "biggest_win": 22,
+            "rounds_won": 1
+        }
+    },
+    "TestUser": {
+        "balance": 500100,
+        "stats": {
+            "total_spins": 0,
             "total_won": 0,
-            "total_bet": 459,
+            "total_bet": 0,
             "biggest_win": 0,
             "rounds_won": 0
         }

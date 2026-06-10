@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Slot Machine - Interactive Web Edition</title>
+    <meta name="description" content="Play the premium, interactive Python Slot Machine game directly in your browser with local profile persistence, real-time session statistics, and retro synthesized sound effects.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-background"></div>
+    <div class="glow-container">
+        <div class="glow-circle glow-circle-1"></div>
+        <div class="glow-circle glow-circle-2"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="app-container">
+        
+        <!-- 1. LANDING / PROFILE SELECTOR SCREEN -->
+        <section id="screen-landing" class="card glass-card screen-section active">
+            <div class="brand-header">
+                <span class="brand-emoji animate-bounce">🎰</span>
+                <h1>PREMIUM SLOT MACHINE</h1>
+                <p class="brand-subtitle">Interactive Web Edition</p>
+            </div>
+
+            <div class="profile-flow-container">
+                <!-- Select Existing Profile -->
+                <div class="flow-box select-profile-box">
+                    <h2>👥 Select Existing Profile</h2>
+                    <div class="form-group">
+                        <select id="select-profile-dropdown" class="input-select">
+                            <option value="" disabled selected>Choose a profile...</option>
+                        </select>
+                    </div>
+                    <button id="btn-load-profile" class="btn btn-primary btn-block">Load Profile</button>
+                </div>
+
+                <div class="flow-divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Create New Profile -->
+                <div class="flow-box create-profile-box">
+                    <h2>✨ Create New Profile</h2>
+                    <div class="form-group">
+                        <label for="input-new-profile-name">Profile Name</label>
+                        <input type="text" id="input-new-profile-name" class="input-text" placeholder="Enter name..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-initial-deposit">Initial Deposit ($)</label>
+                        <input type="number" id="input-initial-deposit" class="input-number" min="1" max="100000" value="500">
+                    </div>
+                    <button id="btn-create-profile" class="btn btn-accent btn-block">Create & Deposit</button>
+                </div>
+            </div>
+            
+            <div id="landing-error" class="error-message hidden"></div>
+        </section>
+
+        <!-- 2. MAIN GAME INTERFACE -->
+        <section id="screen-game" class="screen-section">
+            <!-- Game Header -->
+            <header class="game-header card glass-card">
+                <div class="user-info">
+                    <span class="user-avatar">👤</span>
+                    <div>
+                        <span class="user-label">Player</span>
+                        <div id="display-player-name" class="user-name">-</div>
+                    </div>
+                </div>
+
+                <div class="balance-display">
+                    <span class="balance-label">Current Balance</span>
+                    <div id="display-balance" class="balance-amount">$0</div>
+                </div>
+
+                <div class="header-actions">
+                    <button id="btn-open-deposit" class="btn btn-secondary-outline">💵 Deposit</button>
+                    <button id="btn-logout" class="btn btn-danger-outline">🚪 Log Out</button>
+                </div>
+            </header>
+
+            <div class="game-grid">
+                <!-- Left: Slot Machine Reels & Controls -->
+                <div class="game-main-panel">
+                    
+                    <!-- Slot Machine Visual Cabinet -->
+                    <div class="slot-machine-cabinet">
+                        <!-- Cabinet Top Header -->
+                        <div class="cabinet-banner">
+                            <div class="neon-light-bar"></div>
+                            <span class="jackpot-symbols">💎 💎 💎</span>
+                            <span class="cabinet-title">JACKPOT</span>
+                            <span class="jackpot-symbols">💎 💎 💎</span>
+                        </div>
+
+                        <!-- Reels Frame -->
+                        <div class="reels-frame">
+                            <!-- Horizontal Line overlays for highlighting wins -->
+                            <div id="payline-1" class="payline-visual line-row-1"></div>
+                            <div id="payline-2" class="payline-visual line-row-2"></div>
+                            <div id="payline-3" class="payline-visual line-row-3"></div>
+
+                            <div class="reels-container">
+                                <!-- Reel 1 -->
+                                <div class="reel" id="reel-0">
+                                    <div class="reel-inner">
+                                        <div class="slot-cell">🍒</div>
+                                        <div class="slot-cell">🍋</div>
+                                        <div class="slot-cell">🔔</div>
+                                    </div>
+                                </div>
+                                <!-- Reel 2 -->
+                                <div class="reel" id="reel-1">
+                                    <div class="reel-inner">
+                                        <div class="slot-cell">🍋</div>
+                                        <div class="slot-cell">🍒</div>
+                                        <div class="slot-cell">💎</div>
+                                    </div>
+                                </div>
+                                <!-- Reel 3 -->
+                                <div class="reel" id="reel-2">
+                                    <div class="reel-inner">
+                                        <div class="slot-cell">🔔</div>
+                                        <div class="slot-cell">💎</div>
+                                        <div class="slot-cell">🍒</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Winner Announcement Board -->
+                        <div class="announcement-board">
+                            <div id="announcement-text" class="announcement-idle">PLACE YOUR BET & SPIN!</div>
+                        </div>
+                    </div>
+
+                    <!-- Spin Controls -->
+                    <div class="controls-card card glass-card">
+                        <div class="control-row">
+                            <!-- Lines Selector -->
+                            <div class="control-group">
+                                <label class="control-label">Bet Lines (1 - 3)</label>
+                                <div class="btn-group" role="group">
+                                    <button type="button" id="btn-line-1" class="btn btn-selector active" data-lines="1">1 Line</button>
+                                    <button type="button" id="btn-line-2" class="btn btn-selector" data-lines="2">2 Lines</button>
+                                    <button type="button" id="btn-line-3" class="btn btn-selector" data-lines="3">3 Lines</button>
+                                </div>
+                            </div>
+
+                            <!-- Bet Per Line -->
+                            <div class="control-group">
+                                <label for="input-bet-amount" class="control-label">Bet Per Line ($1 - $100)</label>
+                                <div class="bet-input-wrapper">
+                                    <button id="btn-bet-minus" class="btn btn-adjust">-</button>
+                                    <input type="number" id="input-bet-amount" class="input-bet" min="1" max="100" value="10">
+                                    <button id="btn-bet-plus" class="btn btn-adjust">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-row-summary">
+                            <div class="total-bet-display">
+                                <span class="total-bet-label">Total Bet:</span>
+                                <span id="display-total-bet" class="total-bet-amount">$10</span>
+                            </div>
+
+                            <button id="btn-spin" class="btn btn-spin-trigger">
+                                <span class="spin-glow"></span>
+                                <span class="spin-text">🎰 SPIN</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Stats & Rules -->
+                <div class="game-side-panel">
+                    
+                    <!-- Stats Dashboard -->
+                    <div class="stats-card card glass-card">
+                        <div class="card-header">
+                            <h3>📊 Session Statistics</h3>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-num" id="stat-spins">0</span>
+                                <span class="stat-label">Spins</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-num" id="stat-winrate">0.0%</span>
+                                <span class="stat-label">Win Rate</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-num text-blue" id="stat-bet">$0</span>
+                                <span class="stat-label">Total Bet</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-num text-green" id="stat-won">$0</span>
+                                <span class="stat-label">Total Won</span>
+                            </div>
+                            <div class="stat-box col-span-2 highlight-box" id="stat-net-box">
+                                <span class="stat-num" id="stat-net">$0</span>
+                                <span class="stat-label">Net Profit / Loss</span>
+                            </div>
+                            <div class="stat-box col-span-2">
+                                <span class="stat-num text-gold" id="stat-biggest">$0</span>
+                                <span class="stat-label">Biggest Win</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rules & Symbol Values -->
+                    <div class="rules-card card glass-card">
+                        <div class="card-header">
+                            <h3>📜 Multipliers & Odds</h3>
+                        </div>
+                        <table class="rules-table">
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Quantity</th>
+                                    <th>Payout</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="symbol-badge">💎</span> Diamond</td>
+                                    <td>2</td>
+                                    <td class="multiplier-val">5x</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="symbol-badge">🔔</span> Bell</td>
+                                    <td>4</td>
+                                    <td class="multiplier-val">4x</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="symbol-badge">🍋</span> Lemon</td>
+                                    <td>6</td>
+                                    <td class="multiplier-val">3x</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="symbol-badge">🍒</span> Cherry</td>
+                                    <td>8</td>
+                                    <td class="multiplier-val">2x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="rules-footer">
+                            <p>💡 Align matching symbols horizontally in betted rows to win!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. DEPOSIT MODAL -->
+    <div id="modal-deposit" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content card glass-card animate-zoom">
+            <button id="btn-close-deposit" class="modal-close-btn">&times;</button>
+            <h2>💵 Deposit More Funds</h2>
+            <p class="modal-desc">Add chips to your profile balance to continue playing.</p>
+            <div class="form-group">
+                <label for="input-deposit-amount">Deposit Amount ($)</label>
+                <input type="number" id="input-deposit-amount" class="input-number" min="1" max="100000" value="200">
+            </div>
+            <div class="deposit-presets">
+                <button class="btn btn-preset" data-amount="100">+$100</button>
+                <button class="btn btn-preset" data-amount="500">+$500</button>
+                <button class="btn btn-preset" data-amount="1000">+$1000</button>
+                <button class="btn btn-preset" data-amount="5000">+$5000</button>
+            </div>
+            <button id="btn-submit-deposit" class="btn btn-primary btn-block">Confirm Deposit</button>
+        </div>
+    </div>
+
+    <!-- AUDIO CONTROLS (FLOAT FLOATING) -->
+    <div class="audio-control-float">
+        <button id="btn-toggle-sound" class="btn btn-sound muted" title="Toggle Sound">
+            <span class="sound-icon-muted">🔈</span>
+            <span class="sound-icon-unmuted">🔊</span>
+            <span class="sound-text">Sound: OFF</span>
+        </button>
+    </div>
+
+    <!-- Main JavaScript File -->
+    <script src="app.js"></script>
+</body>
+</html>
