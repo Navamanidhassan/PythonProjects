@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624ccae6-a4cf-4eeb-8bc3-58e56f02c00b" name="Changes" comment="done 1" />
+    <list default="true" id="624ccae6-a4cf-4eeb-8bc3-58e56f02c00b" name="Changes" comment="done 2">
+      <change beforePath="$PROJECT_DIR$/Slot machine python project/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slot machine python project/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +18,11 @@
         <option name="argument" value="--tags" />
         <option name="title" value="All" />
       </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -45,9 +52,10 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "agy",
     "ignore.virus.scanning.warn.message": "true",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
@@ -75,7 +83,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780993072645</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="done 2">
+      <option name="closed" value="true" />
+      <created>1780994532291</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1780994532291</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -103,6 +119,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="done 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="done 1" />
+    <MESSAGE value="done 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="done 2" />
   </component>
 </project>
